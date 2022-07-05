@@ -1,17 +1,33 @@
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import app from './app';
+import { initDb } from "./mongo";
 
-const app = express();
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017"
 const PORT = process.env.PORT || 3000;
 
-// accept json
-app.use(express.json());
+async function main(){    
+    try{
+        console.log("Starting Db...");
+        await initDb(DB_URI);
+        console.log("Starting web server...");
+        app.listen(PORT, () => {
+            console.log(`listening on http://localhost:${PORT}`);
+        });
+    }catch(error: any){
+        throw new Error(error.message);
+    }    
+}
 
-app.get('/', (req, res) => {
-    res.status(200).json({ "message": "Hello, World" });
-});
+// initDb(DB_URI)
+//     .then(()=>{
+//         app.listen(PORT, () => {
+//             console.log(`listening on http://localhost:${PORT}`);
+//         });
+//     })
+//     .catch(error => process.exit(1))
 
-app.listen(PORT, () => {
-    console.log(`listening on http://localhost:${PORT}`);
-});
+main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+})
