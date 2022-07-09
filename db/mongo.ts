@@ -5,10 +5,11 @@ connection.on("error", error => console.log("no connection to db:", error.messag
 // close connection if we CTRL+C the server
 process.on('SIGINT', () => {
     connection.close( () => {
-        console.log('Mongoose disconnected');
+        console.log('SIGINT Signal: Mongoose disconnected');
         process.exit(0);
     })
 })
+
 /**
  * Starts a connection with mongoDb using mongoose
  */

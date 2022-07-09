@@ -1,0 +1,28 @@
+GET http://localhost:3000/
+
+### ok 
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "ismael",
+    "email": "ismael.ismaac",
+    "password": "isma"
+}
+### missing parameters
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "ismael"  
+}
+
+### ok
+GET http://localhost:3000/user/62c97dcfac8aeee24c743af8
+### not found
+GET http://localhost:3000/user/62c48a96fbc147aba9b5f761
+### wrong id format
+GET http://localhost:3000/user/62c48a96fbc147aba9b5f76
+
+### DELETE A RECORD BY ID 
+DELETE http://localhost:3000/user/62c848c69239ed87305db10d

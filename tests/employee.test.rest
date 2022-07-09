@@ -1,0 +1,44 @@
+GET http://localhost:3000/
+
+### create new employee
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+    "name": "abab",
+    "email": "a@ab"
+}
+### EMPTY POST
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+    
+}
+
+### INVALID JSON
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+    "name": "ismael",
+    "email": "ismabdfel.ismaacdca",
+}
+### missing parameters
+POST http://localhost:3000/employee
+Content-Type: application/json
+
+{
+//    "name": "ismael",
+    "email": "isma.sdaaca"
+}
+
+### ok
+GET http://localhost:3000/employee/62c9e2260dd09d73b2230aad
+### not found
+GET http://localhost:3000/employee/62c48a96fbc147aba9b5f761
+### wrong id format
+GET http://localhost:3000/employee/62c48a96fbc147aba9b5f76
+
+### DELETE A RECORD BY ID 
+DELETE http://localhost:3000/employee/62c9d9710f8f24cd01bae201

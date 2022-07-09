@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
-import app from './app';
-import { initDb } from "./mongo";
+import expressApp from './src/app';
+import { initDb } from "./db/mongo";
 
-const DB_URI = process.env.DB_URI || "mongodb://localhost:27017"
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/development"
 const PORT = process.env.PORT || 3000;
 
 async function main(){    
@@ -11,9 +11,9 @@ async function main(){
         console.log("Starting Db...");
         await initDb(DB_URI);
         console.log("Starting web server...");
-        app.listen(PORT, () => {
-            console.log(`listening on http://localhost:${PORT}`);
-        });
+        await expressApp.listen(PORT)
+        console.log(`listening on http://localhost:${PORT}`);            
+        
     }catch(error: any){
         throw new Error(error.message);
     }    
