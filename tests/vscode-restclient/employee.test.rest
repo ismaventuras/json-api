@@ -5,8 +5,8 @@ POST http://localhost:3000/employee
 Content-Type: application/json
 
 {
-    "name": "abab",
-    "email": "a@ab"
+    "name": "Test User",
+    "email": "test@example.local"
 }
 ### EMPTY POST
 POST http://localhost:3000/employee
@@ -21,16 +21,16 @@ POST http://localhost:3000/employee
 Content-Type: application/json
 
 {
-    "name": "ismael",
-    "email": "ismabdfel.ismaacdca",
+    "name": "Test User",
+    "email": "Test.User@example.local",
 }
 ### missing parameters
 POST http://localhost:3000/employee
 Content-Type: application/json
 
 {
-//    "name": "ismael",
-    "email": "isma.sdaaca"
+    //"name": "Test User",
+    "email": "Test.User@example.local",
 }
 
 ### ok

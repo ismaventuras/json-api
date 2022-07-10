@@ -59,3 +59,13 @@ export const updateEmployee = async (id: string, data: any) => {
     throw error
   }
 }
+
+
+export const getAllEmployee = async () => {
+  try{
+    let allEmployees = await Employee.find({});
+    return allEmployees
+  }catch(error:any){
+    throw error
+  }
+}

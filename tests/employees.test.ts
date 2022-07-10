@@ -1,7 +1,10 @@
-import { expect } from "chai";
-import { createEmployee, deleteEmployee, getEmployee, updateEmployee } from "../src/controllers/EmployeeController"
+import { assert, expect } from "chai";
+import { createEmployee, deleteEmployee, getAllEmployee, getEmployee, updateEmployee } from "../src/controllers/EmployeeController"
 import mongoose from "mongoose";
+import Employee from "../src/models/EmployeeModel";
+import data from "./employees.json";
 
+const DB_URI = "mongodb://localhost:27017/development"
 // Open connection to DB
 mongoose.connect("mongodb://localhost:27017/development")
 mongoose.connection
@@ -12,7 +15,8 @@ mongoose.connection
 
 describe("Test Employee collection on MongoDb", (async () => {
     beforeEach(done => {
-        mongoose.connection.collections.employees.drop(() => {
+        // drop the collection before each test
+        mongoose.connection.collections.employees.drop(() => { 
             done();
         });
     });
@@ -39,7 +43,21 @@ describe("Test Employee collection on MongoDb", (async () => {
         expect(deleted.name).to.equal(foundEmployeeAfterUpdate.name);
         expect(deleted.email).to.equal(foundEmployeeAfterUpdate.email);
 
-        mongoose.connection.close()
+
+    });
+    
+    it("gets all employees and checks collection is empty", async ()=> {
+        // check if employees length is 0
+        let zeroEmployees = await getAllEmployee();
+        expect(zeroEmployees.length).to.equal(0);
+    });
+    it("populates DB with 145 records", async () => {
+        let addedEmployees = await Employee.collection.insertMany(data);
+        assert(addedEmployees.insertedCount > 0);
+    })
+
+    after(async function (){
+        await mongoose.connection.close()
     })
 }))
 
