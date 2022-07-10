@@ -1,20 +1,3 @@
-# JSON API - CRUD - MERN STACK
+# JSON API
 
-repositorio para hacer una API json con typescript y nodejs
-
-## tecnologias
-
-- typescript
-- nodejs
-- npm
-- express
-- mongoDB
-- mongoose
-
-## qué hacer
-
-- [x] web server
-- [x] solo json
-- [] tests?
-- [] seguridad?
-
+A JSON REST API built with NodeJS , MongoDB , Mongoose and Typescript.
